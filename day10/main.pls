@@ -39,6 +39,8 @@ let run(instructions, onCycle) = {
 
 }
 
+let abs(x) = if x < 0 then 0 - x else x
+
 
 if not part2 then {
     let sum = 0
@@ -59,6 +61,25 @@ if not part2 then {
     print("Sum: " ~ toString(sum))
 } else {
 
+    run(instructions, \state -> {
+        let index = mod(state.cycle - 1, 40)
+
+        if (abs(state.registerX - index) <= 1) then {
+            # This uses printf to avoid printing a trailing newline
+            !printf "#"
+            # These should really not be necessary
+            ()
+        } else {
+            !printf "."
+            ()
+        }
+
+        if (mod(state.cycle, 40) == 0) then {
+            print("")
+        } else {}
+            
+        true
+    })
 }
 
 
